@@ -591,6 +591,24 @@ void WorldBots::Update(uint32 diff)
                 LOG_DEBUG("server.loading", ">> mod-ai-bots: автономный бот {} погиб, респавн через {} с.",
                     bot.guid, AiBotsConfig::GetWorldBotsRespawnSeconds());
             }
+            else if (bot.respawnTimerMs > AiBotsConfig::GetUpdateIntervalMs())
+            {
+                // Тикаем таймер: без этого бот оставался мёртвым навсегда.
+                bot.respawnTimerMs -= AiBotsConfig::GetUpdateIntervalMs();
+            }
+            else
+            {
+                bot.respawnTimerMs = 0;
+                bot.alive = true;
+
+                player->ResurrectPlayer(1.0f);
+                player->SpawnCorpseBones();
+                // Уводим с места смерти: иначе бот встаёт под тем же мобом
+                // и погибает снова (петля «умер — возродился — умер»).
+                player->RepopAtGraveyard();
+
+                LOG_INFO("server.loading", ">> mod-ai-bots: автономный бот {} возрождён.", bot.guid);
+            }
             continue;
         }
 
