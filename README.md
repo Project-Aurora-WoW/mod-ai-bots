@@ -1,5 +1,7 @@
 # mod-ai-bots
 
+[![core-build](https://github.com/Project-Aurora-WoW/mod-ai-bots/actions/workflows/core-build.yml/badge.svg)](https://github.com/Project-Aurora-WoW/mod-ai-bots/actions/workflows/core-build.yml)
+
 [![License: AGPL v3](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](LICENSE)
 [![AzerothCore](https://img.shields.io/badge/AzerothCore-3.3.5a-green.svg)](https://www.azerothcore.org/)
 
