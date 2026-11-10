@@ -108,6 +108,11 @@ void BotAI::FollowOwner()
     if (!_owner || !_owner->IsInWorld())
         return;
 
+    // В бою не перебиваем погоню: MoveFollow каждые полсекунды срывал
+    // атаку, и спутник только ходил за владельцем.
+    if (_bot->IsInCombat() || _bot->GetVictim())
+        return;
+
     float dist = _bot->GetDistance(_owner);
     if (dist > AiBotsConfig::GetFollowDistance() + 2.0f)
         _bot->GetMotionMaster()->MoveFollow(_owner, AiBotsConfig::GetFollowDistance(), 0.0f);
