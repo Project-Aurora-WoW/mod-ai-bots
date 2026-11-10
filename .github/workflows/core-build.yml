@@ -1,0 +1,44 @@
+name: core-build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout module
+        uses: actions/checkout@v4
+        with:
+          path: mod-ai-bots
+
+      - name: Checkout AzerothCore
+        uses: actions/checkout@v4
+        with:
+          repository: azerothcore/azerothcore-wotlk
+          ref: master
+          path: azerothcore-wotlk
+
+      - name: Place module
+        run: cp -r mod-ai-bots azerothcore-wotlk/modules/mod-ai-bots
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake make g++ git \
+            libssl-dev libbz2-dev libreadline-dev libncurses-dev \
+            zlib1g-dev libmysqlclient-dev
+
+      - name: Configure
+        run: |
+          cmake -S azerothcore-wotlk -B build \
+            -DCMAKE_INSTALL_PREFIX="$PWD/install" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DTOOLS=0 \
+            -DSCRIPTS=static \
+            -DMODULES=static
+
+      - name: Build
+        run: cmake --build build --config Release -j 4

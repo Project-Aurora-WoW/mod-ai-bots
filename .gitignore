@@ -1,0 +1,37 @@
+# Сборка
+build/
+cmake-build-*/
+out/
+bin/
+lib/
+*.obj
+*.o
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.a
+*.so
+*.dll
+*.exe
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.sln
+*.vcxproj
+*.vcxproj.filters
+CMakeUserPresets.json
+compile_commands.json
+
+# Логи и дампы
+logs/
+*.log
+*.dmp
+
+# Временные файлы ОС
+Thumbs.db
+.DS_Store
