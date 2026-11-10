@@ -603,9 +603,6 @@ void WorldBots::Update(uint32 diff)
 
                 player->ResurrectPlayer(1.0f);
                 player->SpawnCorpseBones();
-                // Уводим с места смерти: иначе бот встаёт под тем же мобом
-                // и погибает снова (петля «умер — возродился — умер»).
-                player->RepopAtGraveyard();
 
                 LOG_INFO("server.loading", ">> mod-ai-bots: автономный бот {} возрождён.", bot.guid);
             }
