@@ -90,7 +90,7 @@ AI-боты для **AzerothCore** (WotLK 3.3.5a): автономные перс
 
 ```bash
 cd azerothcore-wotlk/modules
-git clone https://github.com/your-account/mod-ai-bots.git mod-ai-bots
+git clone https://github.com/maxorlov59rus/mod-ai-bots.git mod-ai-bots
 ```
 
 ### 2. Сборка
